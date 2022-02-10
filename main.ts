@@ -24,6 +24,7 @@ function Trap1 () {
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.Enemy)
     tiles.placeOnTile(TRAP1, tiles.getTileLocation(5, 13))
+    tiles.setWallAt(tiles.getTileLocation(5, 12), true)
     TRAP1.setImage(img`
         . . . . . . . 1 1 . . . . . . . 
         . . . . . . . 1 1 . . . . . . . 
