@@ -24,7 +24,6 @@ function Trap1 () {
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.Enemy)
     tiles.placeOnTile(TRAP1, tiles.getTileLocation(5, 13))
-    tiles.setWallAt(tiles.getTileLocation(5, 12), true)
     TRAP1.setImage(img`
         . . . . . . . 1 1 . . . . . . . 
         . . . . . . . 1 1 . . . . . . . 
@@ -43,6 +42,9 @@ function Trap1 () {
         1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
         1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
         `)
+    tiles.setWallAt(tiles.getTileLocation(5, 10), false)
+    tiles.setWallAt(tiles.getTileLocation(5, 1), false)
+    tiles.setWallAt(tiles.getTileLocation(5, 2), false)
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile10`, function (sprite, location) {
     TRAP1.setVelocity(0, -100)
