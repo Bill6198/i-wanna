@@ -1,5 +1,22 @@
 function Switch () {
-    Switch2 = sprites.create(sprites.castle.tileGrass1, SpriteKind.Food)
+    Switch2 = sprites.create(img`
+        7 . . . . . . . . . . . . . . 7 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        7 . . . . . . . . . . . . . . 7 
+        `, SpriteKind.Food)
     tiles.placeOnTile(Switch2, tiles.getTileLocation(6, 12))
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -90,6 +107,7 @@ let Switch2: Sprite = null
 tiles.setTilemap(tilemap`level1`)
 mainplayer1()
 Trap1()
+Switch()
 game.onUpdate(function () {
     if (MainPlayer.ay == 0) {
         CD = true
