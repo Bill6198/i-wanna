@@ -1,3 +1,7 @@
+function Switch () {
+    Switch2 = sprites.create(sprites.castle.tileGrass1, SpriteKind.Food)
+    tiles.placeOnTile(Switch2, tiles.getTileLocation(6, 12))
+}
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (CD) {
         MainPlayer.vy = -150
@@ -46,8 +50,11 @@ function Trap1 () {
     tiles.setWallAt(tiles.getTileLocation(5, 1), false)
     tiles.setWallAt(tiles.getTileLocation(5, 2), false)
 }
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile10`, function (sprite, location) {
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     TRAP1.setVelocity(0, -100)
+})
+scene.onOverlapTile(SpriteKind.Player, sprites.castle.tileGrass1, function (sprite, location) {
+	
 })
 function mainplayer1 () {
     MainPlayer = sprites.create(img`
@@ -79,6 +86,7 @@ let TRAP1: Sprite = null
 let gravity = 0
 let MainPlayer: Sprite = null
 let CD = false
+let Switch2: Sprite = null
 tiles.setTilemap(tilemap`level1`)
 mainplayer1()
 Trap1()
