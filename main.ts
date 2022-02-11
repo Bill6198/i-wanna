@@ -45,9 +45,6 @@ function Trap1 () {
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.Enemy)
     tiles.placeOnTile(TRAP1, tiles.getTileLocation(5, 13))
-    tiles.setWallAt(tiles.getTileLocation(5, 10), false)
-    tiles.setWallAt(tiles.getTileLocation(5, 1), false)
-    tiles.setWallAt(tiles.getTileLocation(5, 2), false)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     TRAP1.setImage(img`
@@ -69,6 +66,9 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
         1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
         `)
     TRAP1.setVelocity(0, -100)
+    tiles.setWallAt(tiles.getTileLocation(5, 10), false)
+    tiles.setWallAt(tiles.getTileLocation(5, 1), false)
+    tiles.setWallAt(tiles.getTileLocation(5, 2), false)
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.castle.tileGrass1, function (sprite, location) {
 	
