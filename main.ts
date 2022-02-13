@@ -1,78 +1,125 @@
-function Switch () {
-    Switch2 = sprites.create(img`
-        7 . . . . . . . . . . . . . . 7 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        7 . . . . . . . . . . . . . . 7 
-        `, SpriteKind.Food)
-    tiles.placeOnTile(Switch2, tiles.getTileLocation(6, 12))
-}
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (CD) {
-        MainPlayer.vy = -150
-        MainPlayer.ay = gravity
+    if (MainPlayer.vy == 0 || count < 2) {
+        MainPlayer.vy = -100
+        MainPlayer.ay = 200
+        count += 1
+    }
+})
+function Reminder () {
+    Remainder_Lists = []
+    for (let index = 0; index < 3; index++) {
+        Remainder_Lists.push(sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . e e e e e e e e e e e e . . 
+            . . e e e e e e e e e e e e . . 
+            . . e e 1 1 1 1 1 1 1 1 e e . . 
+            . . e e 1 1 1 1 1 1 1 1 e e . . 
+            . . e e 1 1 1 1 1 1 1 1 e e . . 
+            . . e e 1 1 1 1 1 1 1 1 e e . . 
+            . . e e 1 1 1 1 1 1 1 1 e e . . 
+            . . e e e e e e e e e e e e . . 
+            . . e e e e e e e e e e e e . . 
+            . . . . . . . e e . . . . . . . 
+            . . . . . . . e e . . . . . . . 
+            . . . . . . . e e . . . . . . . 
+            7 . . . 7 . . e e . . . . . . . 
+            7 7 . 7 7 7 . e e . 7 7 . . 7 . 
+            7 7 7 7 7 7 7 e e 7 7 7 7 7 7 7 
+            `, SpriteKind.Projectile))
+    }
+    tiles.placeOnTile(Remainder_Lists[0], tiles.getTileLocation(19, 27))
+    tiles.placeOnTile(Remainder_Lists[1], tiles.getTileLocation(22, 27))
+    tiles.placeOnTile(Remainder_Lists[2], tiles.getTileLocation(22, 23))
+}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
+    if (otherSprite.image.equals(img`
+        . . . . . . . . . . . . . . . . 
+        . . e e e e e e e e e e e e . . 
+        . . e e e e e e e e e e e e . . 
+        . . e e 1 1 1 1 1 1 1 1 e e . . 
+        . . e e 1 1 1 1 1 1 1 1 e e . . 
+        . . e e 1 1 1 1 1 1 1 1 e e . . 
+        . . e e 1 1 1 1 1 1 1 1 e e . . 
+        . . e e 1 1 1 1 1 1 1 1 e e . . 
+        . . e e e e e e e e e e e e . . 
+        . . e e e e e e e e e e e e . . 
+        . . . . . . . e e . . . . . . . 
+        . . . . . . . e e . . . . . . . 
+        . . . . . . . e e . . . . . . . 
+        7 . . . 7 . . e e . . . . . . . 
+        7 7 . 7 7 7 . e e . 7 7 . . 7 . 
+        7 7 7 7 7 7 7 e e 7 7 7 7 7 7 7 
+        `)) {
+        if (MainPlayer.tilemapLocation().column == 19 && (25 <= MainPlayer.tilemapLocation().row && MainPlayer.tilemapLocation().row <= 27)) {
+            Remainder_Lists[0].sayText("Don't walk or run, jump!!!", 500, false)
+            pause(800)
+        } else {
+            if (MainPlayer.tilemapLocation().column > 19) {
+                Trap_Lists[0].setImage(img`
+                    . . . . . . . 1 1 . . . . . . . 
+                    . . . . . . . 1 1 . . . . . . . 
+                    . . . . . . 1 1 1 1 . . . . . . 
+                    . . . . . . 1 1 1 1 . . . . . . 
+                    . . . . . 1 1 1 1 1 1 . . . . . 
+                    . . . . . 1 1 1 1 1 1 . . . . . 
+                    . . . . 1 1 1 1 1 1 1 1 . . . . 
+                    . . . . 1 1 1 1 1 1 1 1 . . . . 
+                    . . . 1 1 1 1 1 1 1 1 1 1 . . . 
+                    . . . 1 1 1 1 1 1 1 1 1 1 . . . 
+                    . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+                    . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+                    . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+                    . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+                    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+                    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+                    `)
+                Trap_Lists[1].setImage(img`
+                    . . . . . . . 1 1 . . . . . . . 
+                    . . . . . . . 1 1 . . . . . . . 
+                    . . . . . . 1 1 1 1 . . . . . . 
+                    . . . . . . 1 1 1 1 . . . . . . 
+                    . . . . . 1 1 1 1 1 1 . . . . . 
+                    . . . . . 1 1 1 1 1 1 . . . . . 
+                    . . . . 1 1 1 1 1 1 1 1 . . . . 
+                    . . . . 1 1 1 1 1 1 1 1 . . . . 
+                    . . . 1 1 1 1 1 1 1 1 1 1 . . . 
+                    . . . 1 1 1 1 1 1 1 1 1 1 . . . 
+                    . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+                    . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+                    . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+                    . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+                    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+                    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+                    `)
+            }
+        }
     }
 })
 function Trap1 () {
-    TRAP1 = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.Enemy)
-    tiles.placeOnTile(TRAP1, tiles.getTileLocation(5, 13))
+    Trap_Lists = []
+    for (let index = 0; index < 2; index++) {
+        Trap_Lists.push(sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, SpriteKind.Enemy))
+    }
+    tiles.placeOnTile(Trap_Lists[0], tiles.getTileLocation(21, 29))
+    tiles.placeOnTile(Trap_Lists[1], tiles.getTileLocation(20, 29))
 }
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
-    TRAP1.setImage(img`
-        . . . . . . . 1 1 . . . . . . . 
-        . . . . . . . 1 1 . . . . . . . 
-        . . . . . . 1 1 1 1 . . . . . . 
-        . . . . . . 1 1 1 1 . . . . . . 
-        . . . . . 1 1 1 1 1 1 . . . . . 
-        . . . . . 1 1 1 1 1 1 . . . . . 
-        . . . . 1 1 1 1 1 1 1 1 . . . . 
-        . . . . 1 1 1 1 1 1 1 1 . . . . 
-        . . . 1 1 1 1 1 1 1 1 1 1 . . . 
-        . . . 1 1 1 1 1 1 1 1 1 1 . . . 
-        . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
-        . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
-        . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
-        . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
-        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-        `)
-    TRAP1.setVelocity(0, -100)
-    tiles.setWallAt(tiles.getTileLocation(5, 10), false)
-    tiles.setWallAt(tiles.getTileLocation(5, 1), false)
-    tiles.setWallAt(tiles.getTileLocation(5, 2), false)
-})
-scene.onOverlapTile(SpriteKind.Player, sprites.castle.tileGrass1, function (sprite, location) {
-	
-})
 function mainplayer1 () {
     MainPlayer = sprites.create(img`
         . . . . . . f f f f . . . . . . 
@@ -93,23 +140,20 @@ function mainplayer1 () {
         . . . . . f f . . f f . . . . . 
         `, SpriteKind.Player)
     scene.cameraFollowSprite(MainPlayer)
-    tiles.placeOnTile(MainPlayer, tiles.getTileLocation(0, 19))
+    tiles.placeOnRandomTile(MainPlayer, assets.tile`myTile12`)
     controller.moveSprite(MainPlayer, 100, 0)
-    MainPlayer.ay = gravity
-    gravity = 300
-    CD = true
+    MainPlayer.ay = 200
 }
-let TRAP1: Sprite = null
-let gravity = 0
+let Trap_Lists: Sprite[] = []
+let Remainder_Lists: Sprite[] = []
+let count = 0
 let MainPlayer: Sprite = null
-let CD = false
-let Switch2: Sprite = null
 tiles.setTilemap(tilemap`level1`)
 mainplayer1()
 Trap1()
-Switch()
+Reminder()
 game.onUpdate(function () {
-    if (MainPlayer.ay == 0) {
-        CD = true
+    if (MainPlayer.vy == 0) {
+        count = 0
     }
 })
