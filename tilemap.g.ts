@@ -81,8 +81,8 @@ namespace myTiles {
 2............................2
 2.........................2222
 2............................2
-22222222222222222222..22222222
-22222222222222222222..22222222
+2222222222222222222...22222222
+2222222222222222222...22222222
 `, [myTiles.transparency16,sprites.castle.tilePath5,myTiles.tile14,sprites.castle.tilePath2,myTiles.tile2], TileScale.Sixteen);
         }
         return null;

@@ -54,14 +54,12 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, ot
             Remainder_Lists[0].sayText("Don't walk or run, jump!!!", 500, false)
         } else if (MainPlayer.tilemapLocation().column == 22 && (25 <= MainPlayer.tilemapLocation().row && MainPlayer.tilemapLocation().row <= 27)) {
             Remainder_Lists[1].sayText("I told you", 500, false)
-        } else {
-        	
         }
     }
 })
 function Trap1 () {
     Trap_Lists = []
-    for (let index = 0; index < 2; index++) {
+    for (let index = 0; index < 3; index++) {
         Trap_Lists.push(sprites.create(img`
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
@@ -83,6 +81,46 @@ function Trap1 () {
     }
     tiles.placeOnTile(Trap_Lists[0], tiles.getTileLocation(21, 29))
     tiles.placeOnTile(Trap_Lists[1], tiles.getTileLocation(20, 29))
+    tiles.placeOnTile(Trap_Lists[2], tiles.getTileLocation(20, 29))
+}
+function mainplayer1 () {
+    MainPlayer = sprites.create(img`
+        . . . . . . f f f f . . . . . . 
+        . . . . f f f 2 2 f f f . . . . 
+        . . . f f f 2 2 2 2 f f f . . . 
+        . . f f f e e e e e e f f f . . 
+        . . f f e 2 2 2 2 2 2 e e f . . 
+        . . f e 2 f f f f f f 2 e f . . 
+        . . f f f f e e e e f f f f . . 
+        . f f e f b f 4 4 f b f e f f . 
+        . f e e 4 1 f d d f 1 4 e e f . 
+        . . f e e d d d d d d e e f . . 
+        . . . f e e 4 4 4 4 e e f . . . 
+        . . e 4 f 2 2 2 2 2 2 f 4 e . . 
+        . . 4 d f 2 2 2 2 2 2 f d 4 . . 
+        . . 4 4 f 4 4 5 5 4 4 f 4 4 . . 
+        . . . . . f f f f f f . . . . . 
+        . . . . . f f . . f f . . . . . 
+        `, SpriteKind.Player)
+    scene.cameraFollowSprite(MainPlayer)
+    tiles.placeOnRandomTile(MainPlayer, assets.tile`myTile12`)
+    controller.moveSprite(MainPlayer, 100, 0)
+    MainPlayer.ay = 200
+}
+let Trap_Lists: Sprite[] = []
+let Remainder_Lists: Sprite[] = []
+let count = 0
+let MainPlayer: Sprite = null
+tiles.setTilemap(tilemap`level1`)
+mainplayer1()
+Trap1()
+Reminder()
+game.onUpdate(function () {
+    if (MainPlayer.vy == 0) {
+        count = 0
+    }
+})
+game.onUpdate(function () {
     if (MainPlayer.tilemapLocation().column >= 19 && MainPlayer.tilemapLocation().column <= 22) {
         Trap_Lists[0].setImage(img`
             . . . . . . . 1 1 . . . . . . . 
@@ -120,42 +158,29 @@ function Trap1 () {
             1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
             1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
             `)
-    }
-}
-function mainplayer1 () {
-    MainPlayer = sprites.create(img`
-        . . . . . . f f f f . . . . . . 
-        . . . . f f f 2 2 f f f . . . . 
-        . . . f f f 2 2 2 2 f f f . . . 
-        . . f f f e e e e e e f f f . . 
-        . . f f e 2 2 2 2 2 2 e e f . . 
-        . . f e 2 f f f f f f 2 e f . . 
-        . . f f f f e e e e f f f f . . 
-        . f f e f b f 4 4 f b f e f f . 
-        . f e e 4 1 f d d f 1 4 e e f . 
-        . . f e e d d d d d d e e f . . 
-        . . . f e e 4 4 4 4 e e f . . . 
-        . . e 4 f 2 2 2 2 2 2 f 4 e . . 
-        . . 4 d f 2 2 2 2 2 2 f d 4 . . 
-        . . 4 4 f 4 4 5 5 4 4 f 4 4 . . 
-        . . . . . f f f f f f . . . . . 
-        . . . . . f f . . f f . . . . . 
-        `, SpriteKind.Player)
-    scene.cameraFollowSprite(MainPlayer)
-    tiles.placeOnRandomTile(MainPlayer, assets.tile`myTile12`)
-    controller.moveSprite(MainPlayer, 100, 0)
-    MainPlayer.ay = 200
-}
-let Trap_Lists: Sprite[] = []
-let Remainder_Lists: Sprite[] = []
-let count = 0
-let MainPlayer: Sprite = null
-tiles.setTilemap(tilemap`level1`)
-mainplayer1()
-Trap1()
-Reminder()
-game.onUpdate(function () {
-    if (MainPlayer.vy == 0) {
-        count = 0
+        Trap_Lists[2].setImage(img`
+            . . . . . . . 1 1 . . . . . . . 
+            . . . . . . . 1 1 . . . . . . . 
+            . . . . . . 1 1 1 1 . . . . . . 
+            . . . . . . 1 1 1 1 . . . . . . 
+            . . . . . 1 1 1 1 1 1 . . . . . 
+            . . . . . 1 1 1 1 1 1 . . . . . 
+            . . . . 1 1 1 1 1 1 1 1 . . . . 
+            . . . . 1 1 1 1 1 1 1 1 . . . . 
+            . . . 1 1 1 1 1 1 1 1 1 1 . . . 
+            . . . 1 1 1 1 1 1 1 1 1 1 . . . 
+            . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+            . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+            . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+            . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+            1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+            1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+            `)
+        if (MainPlayer.tilemapLocation().column == 20) {
+            Trap_Lists[2].setVelocity(0, -150)
+            tiles.setWallAt(tiles.getTileLocation(20, 24), false)
+            pause(1000)
+            tiles.setWallAt(tiles.getTileLocation(20, 24), true)
+        }
     }
 })
