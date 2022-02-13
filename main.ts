@@ -27,7 +27,7 @@ function Reminder () {
             7 7 7 7 7 7 7 e e 7 7 7 7 7 7 7 
             `, SpriteKind.Projectile))
     }
-    tiles.placeOnTile(Remainder_Lists[0], tiles.getTileLocation(19, 27))
+    tiles.placeOnTile(Remainder_Lists[0], tiles.getTileLocation(15, 27))
     tiles.placeOnTile(Remainder_Lists[1], tiles.getTileLocation(22, 27))
     tiles.placeOnTile(Remainder_Lists[2], tiles.getTileLocation(22, 23))
 }
@@ -50,48 +50,12 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, ot
         7 7 . 7 7 7 . e e . 7 7 . . 7 . 
         7 7 7 7 7 7 7 e e 7 7 7 7 7 7 7 
         `)) {
-        if (MainPlayer.tilemapLocation().column == 19 && (25 <= MainPlayer.tilemapLocation().row && MainPlayer.tilemapLocation().row <= 27)) {
+        if (MainPlayer.tilemapLocation().column == 15 && (25 <= MainPlayer.tilemapLocation().row && MainPlayer.tilemapLocation().row <= 27)) {
             Remainder_Lists[0].sayText("Don't walk or run, jump!!!", 500, false)
-            pause(800)
+        } else if (MainPlayer.tilemapLocation().column == 22 && (25 <= MainPlayer.tilemapLocation().row && MainPlayer.tilemapLocation().row <= 27)) {
+            Remainder_Lists[1].sayText("I told you", 500, false)
         } else {
-            if (MainPlayer.tilemapLocation().column > 19) {
-                Trap_Lists[0].setImage(img`
-                    . . . . . . . 1 1 . . . . . . . 
-                    . . . . . . . 1 1 . . . . . . . 
-                    . . . . . . 1 1 1 1 . . . . . . 
-                    . . . . . . 1 1 1 1 . . . . . . 
-                    . . . . . 1 1 1 1 1 1 . . . . . 
-                    . . . . . 1 1 1 1 1 1 . . . . . 
-                    . . . . 1 1 1 1 1 1 1 1 . . . . 
-                    . . . . 1 1 1 1 1 1 1 1 . . . . 
-                    . . . 1 1 1 1 1 1 1 1 1 1 . . . 
-                    . . . 1 1 1 1 1 1 1 1 1 1 . . . 
-                    . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
-                    . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
-                    . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
-                    . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
-                    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-                    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-                    `)
-                Trap_Lists[1].setImage(img`
-                    . . . . . . . 1 1 . . . . . . . 
-                    . . . . . . . 1 1 . . . . . . . 
-                    . . . . . . 1 1 1 1 . . . . . . 
-                    . . . . . . 1 1 1 1 . . . . . . 
-                    . . . . . 1 1 1 1 1 1 . . . . . 
-                    . . . . . 1 1 1 1 1 1 . . . . . 
-                    . . . . 1 1 1 1 1 1 1 1 . . . . 
-                    . . . . 1 1 1 1 1 1 1 1 . . . . 
-                    . . . 1 1 1 1 1 1 1 1 1 1 . . . 
-                    . . . 1 1 1 1 1 1 1 1 1 1 . . . 
-                    . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
-                    . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
-                    . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
-                    . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
-                    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-                    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-                    `)
-            }
+        	
         }
     }
 })
@@ -119,6 +83,44 @@ function Trap1 () {
     }
     tiles.placeOnTile(Trap_Lists[0], tiles.getTileLocation(21, 29))
     tiles.placeOnTile(Trap_Lists[1], tiles.getTileLocation(20, 29))
+    if (MainPlayer.tilemapLocation().column >= 19 && MainPlayer.tilemapLocation().column <= 22) {
+        Trap_Lists[0].setImage(img`
+            . . . . . . . 1 1 . . . . . . . 
+            . . . . . . . 1 1 . . . . . . . 
+            . . . . . . 1 1 1 1 . . . . . . 
+            . . . . . . 1 1 1 1 . . . . . . 
+            . . . . . 1 1 1 1 1 1 . . . . . 
+            . . . . . 1 1 1 1 1 1 . . . . . 
+            . . . . 1 1 1 1 1 1 1 1 . . . . 
+            . . . . 1 1 1 1 1 1 1 1 . . . . 
+            . . . 1 1 1 1 1 1 1 1 1 1 . . . 
+            . . . 1 1 1 1 1 1 1 1 1 1 . . . 
+            . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+            . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+            . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+            . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+            1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+            1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+            `)
+        Trap_Lists[1].setImage(img`
+            . . . . . . . 1 1 . . . . . . . 
+            . . . . . . . 1 1 . . . . . . . 
+            . . . . . . 1 1 1 1 . . . . . . 
+            . . . . . . 1 1 1 1 . . . . . . 
+            . . . . . 1 1 1 1 1 1 . . . . . 
+            . . . . . 1 1 1 1 1 1 . . . . . 
+            . . . . 1 1 1 1 1 1 1 1 . . . . 
+            . . . . 1 1 1 1 1 1 1 1 . . . . 
+            . . . 1 1 1 1 1 1 1 1 1 1 . . . 
+            . . . 1 1 1 1 1 1 1 1 1 1 . . . 
+            . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+            . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+            . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+            . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+            1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+            1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+            `)
+    }
 }
 function mainplayer1 () {
     MainPlayer = sprites.create(img`
