@@ -51,9 +51,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, ot
         7 7 7 7 7 7 7 e e 7 7 7 7 7 7 7 
         `)) {
         if (MainPlayer.tilemapLocation().column == 15 && (25 <= MainPlayer.tilemapLocation().row && MainPlayer.tilemapLocation().row <= 27)) {
-            Remainder_Lists[0].sayText("Don't walk or run, jump!!!", 500, false)
+            Remainder_Lists[0].sayText("Don't walk or run.Jump!!!", 500, false)
         } else if (MainPlayer.tilemapLocation().column == 22 && (25 <= MainPlayer.tilemapLocation().row && MainPlayer.tilemapLocation().row <= 27)) {
-            Remainder_Lists[1].sayText("I told you", 500, false)
+            Remainder_Lists[1].sayText("I told you, Boomer", 500, false)
+        } else if (MainPlayer.tilemapLocation().column == 22 && (21 <= MainPlayer.tilemapLocation().row && MainPlayer.tilemapLocation().row <= 24)) {
+            Remainder_Lists[2].sayText("45 6e 6a 6f 79", 500, false)
         }
     }
 })
@@ -122,66 +124,71 @@ game.onUpdate(function () {
 })
 game.onUpdate(function () {
     if (MainPlayer.tilemapLocation().column >= 19 && MainPlayer.tilemapLocation().column <= 22) {
-        Trap_Lists[0].setImage(img`
-            . . . . . . . 1 1 . . . . . . . 
-            . . . . . . . 1 1 . . . . . . . 
-            . . . . . . 1 1 1 1 . . . . . . 
-            . . . . . . 1 1 1 1 . . . . . . 
-            . . . . . 1 1 1 1 1 1 . . . . . 
-            . . . . . 1 1 1 1 1 1 . . . . . 
-            . . . . 1 1 1 1 1 1 1 1 . . . . 
-            . . . . 1 1 1 1 1 1 1 1 . . . . 
-            . . . 1 1 1 1 1 1 1 1 1 1 . . . 
-            . . . 1 1 1 1 1 1 1 1 1 1 . . . 
-            . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
-            . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
-            . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
-            . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
-            1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-            1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-            `)
-        Trap_Lists[1].setImage(img`
-            . . . . . . . 1 1 . . . . . . . 
-            . . . . . . . 1 1 . . . . . . . 
-            . . . . . . 1 1 1 1 . . . . . . 
-            . . . . . . 1 1 1 1 . . . . . . 
-            . . . . . 1 1 1 1 1 1 . . . . . 
-            . . . . . 1 1 1 1 1 1 . . . . . 
-            . . . . 1 1 1 1 1 1 1 1 . . . . 
-            . . . . 1 1 1 1 1 1 1 1 . . . . 
-            . . . 1 1 1 1 1 1 1 1 1 1 . . . 
-            . . . 1 1 1 1 1 1 1 1 1 1 . . . 
-            . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
-            . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
-            . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
-            . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
-            1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-            1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-            `)
-        Trap_Lists[2].setImage(img`
-            . . . . . . . 1 1 . . . . . . . 
-            . . . . . . . 1 1 . . . . . . . 
-            . . . . . . 1 1 1 1 . . . . . . 
-            . . . . . . 1 1 1 1 . . . . . . 
-            . . . . . 1 1 1 1 1 1 . . . . . 
-            . . . . . 1 1 1 1 1 1 . . . . . 
-            . . . . 1 1 1 1 1 1 1 1 . . . . 
-            . . . . 1 1 1 1 1 1 1 1 . . . . 
-            . . . 1 1 1 1 1 1 1 1 1 1 . . . 
-            . . . 1 1 1 1 1 1 1 1 1 1 . . . 
-            . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
-            . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
-            . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
-            . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
-            1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-            1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-            `)
-        if (MainPlayer.tilemapLocation().column == 20) {
-            Trap_Lists[2].setVelocity(0, -150)
-            tiles.setWallAt(tiles.getTileLocation(20, 24), false)
-            if (Trap_Lists[2].tilemapLocation().row < 24) {
-                tiles.setWallAt(tiles.getTileLocation(20, 24), true)
+        if (25 <= MainPlayer.tilemapLocation().row && MainPlayer.tilemapLocation().row <= 27) {
+            Trap_Lists[0].setImage(img`
+                . . . . . . . 1 1 . . . . . . . 
+                . . . . . . . 1 1 . . . . . . . 
+                . . . . . . 1 1 1 1 . . . . . . 
+                . . . . . . 1 1 1 1 . . . . . . 
+                . . . . . 1 1 1 1 1 1 . . . . . 
+                . . . . . 1 1 1 1 1 1 . . . . . 
+                . . . . 1 1 1 1 1 1 1 1 . . . . 
+                . . . . 1 1 1 1 1 1 1 1 . . . . 
+                . . . 1 1 1 1 1 1 1 1 1 1 . . . 
+                . . . 1 1 1 1 1 1 1 1 1 1 . . . 
+                . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+                . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+                . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+                . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+                1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+                1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+                `)
+            Trap_Lists[1].setImage(img`
+                . . . . . . . 1 1 . . . . . . . 
+                . . . . . . . 1 1 . . . . . . . 
+                . . . . . . 1 1 1 1 . . . . . . 
+                . . . . . . 1 1 1 1 . . . . . . 
+                . . . . . 1 1 1 1 1 1 . . . . . 
+                . . . . . 1 1 1 1 1 1 . . . . . 
+                . . . . 1 1 1 1 1 1 1 1 . . . . 
+                . . . . 1 1 1 1 1 1 1 1 . . . . 
+                . . . 1 1 1 1 1 1 1 1 1 1 . . . 
+                . . . 1 1 1 1 1 1 1 1 1 1 . . . 
+                . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+                . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+                . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+                . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+                1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+                1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+                `)
+            Trap_Lists[2].setImage(img`
+                . . . . . . . 1 1 . . . . . . . 
+                . . . . . . . 1 1 . . . . . . . 
+                . . . . . . 1 1 1 1 . . . . . . 
+                . . . . . . 1 1 1 1 . . . . . . 
+                . . . . . 1 1 1 1 1 1 . . . . . 
+                . . . . . 1 1 1 1 1 1 . . . . . 
+                . . . . 1 1 1 1 1 1 1 1 . . . . 
+                . . . . 1 1 1 1 1 1 1 1 . . . . 
+                . . . 1 1 1 1 1 1 1 1 1 1 . . . 
+                . . . 1 1 1 1 1 1 1 1 1 1 . . . 
+                . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+                . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+                . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+                . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+                1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+                1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+                `)
+            if (MainPlayer.tilemapLocation().column == 20) {
+                Trap_Lists[2].setVelocity(0, -150)
+                tiles.setWallAt(tiles.getTileLocation(20, 24), false)
+                if (Trap_Lists[2].tilemapLocation().row < 24) {
+                    tiles.setWallAt(tiles.getTileLocation(20, 24), true)
+                }
             }
+        } else if (21 <= MainPlayer.tilemapLocation().row && MainPlayer.tilemapLocation().row <= 24) {
+            tiles.setWallAt(tiles.getTileLocation(20, 24), false)
+            tiles.setWallAt(tiles.getTileLocation(21, 24), false)
         }
     }
 })
