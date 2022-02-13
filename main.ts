@@ -179,8 +179,9 @@ game.onUpdate(function () {
         if (MainPlayer.tilemapLocation().column == 20) {
             Trap_Lists[2].setVelocity(0, -150)
             tiles.setWallAt(tiles.getTileLocation(20, 24), false)
-            pause(1000)
-            tiles.setWallAt(tiles.getTileLocation(20, 24), true)
+            if (Trap_Lists[2].tilemapLocation().row < 24) {
+                tiles.setWallAt(tiles.getTileLocation(20, 24), true)
+            }
         }
     }
 })
