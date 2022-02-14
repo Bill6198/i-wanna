@@ -181,10 +181,6 @@ game.onUpdate(function () {
                 `)
             if (MainPlayer.tilemapLocation().column == 20) {
                 Trap_Lists[2].setVelocity(0, -150)
-                tiles.setWallAt(tiles.getTileLocation(20, 24), false)
-                if (Trap_Lists[2].tilemapLocation().row < 24) {
-                    tiles.setWallAt(tiles.getTileLocation(20, 24), true)
-                }
             }
         } else if (21 <= MainPlayer.tilemapLocation().row && MainPlayer.tilemapLocation().row <= 24) {
             tiles.setWallAt(tiles.getTileLocation(20, 24), false)
